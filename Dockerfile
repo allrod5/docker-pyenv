@@ -3,7 +3,7 @@ MAINTAINER Rodrigo Oliveira <allrod5@hotmail.com>
 
 ADD . .
 
-ENV PYENV_ROOT /root/.pyenv
+ENV PYENV_ROOT /opt/current-app/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 
 
@@ -17,8 +17,7 @@ RUN apt-get update && \
 ENV PYTHONDONTWRITEBYTECODE true
 RUN curl https://pyenv.run | bash
    
-RUN export PATH="$HOME/.pyenv/bin:$PATH" && \
-    eval "$(pyenv init -)" && \
+RUN eval "$(pyenv init -)" && \
     eval "$(pyenv virtualenv-init -)"
    
 RUN pyenv update
