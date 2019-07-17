@@ -1,6 +1,8 @@
 FROM python:3
 MAINTAINER Rodrigo Oliveira <allrod5@hotmail.com>
 
+ADD . .
+
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 
