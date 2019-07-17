@@ -16,8 +16,9 @@ RUN apt-get update && \
 # Install pyenv and default python version.
 ENV PYTHONDONTWRITEBYTECODE true
 RUN curl https://pyenv.run | bash
-    export PATH="$HOME/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
+   
+RUN export PATH="$HOME/.pyenv/bin:$PATH" && \
+    eval "$(pyenv init -)" && \
     eval "$(pyenv virtualenv-init -)"
    
 RUN pyenv update
