@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.7.2
 MAINTAINER Rodrigo Oliveira <allrod5@hotmail.com>
 
 ADD . .
@@ -10,15 +10,18 @@ ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:/usr/local/sbin:/usr/local/bin:/usr/s
 # Install base system libraries.
 RUN apt-get update && \
     apt-get install -y $(cat ./base_dependencies.txt) && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/dpkg/dpkg.cfg.d/02apt-speedup
+    apt-get clean
 
 
 # Install pyenv and default python version.
 ENV PYTHONDONTWRITEBYTECODE true
-RUN git clone https://github.com/yyuu/pyenv.git /root/.pyenv && \
-    cd /root/.pyenv && \
-    git checkout `git describe --abbrev=0 --tags`
+RUN curl https://pyenv.run | bash
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+   
+RUN pyenv update
+    
 RUN pyenv install && \
     pyenv global $(cat .python-version)
 
